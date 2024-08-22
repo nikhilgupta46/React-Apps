@@ -1,0 +1,13 @@
+.searchBoxContainer {
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.listBox {
+  overflow-y: scroll;
+  height: 500px;
+  width: 400px;
+  background-color: antiquewhite;
+}
