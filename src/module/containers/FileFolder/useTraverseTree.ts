@@ -1,5 +1,15 @@
 export const useTraverseTree = () => {
-  const insertNode = ({ tree, folderId, name, isFolder }) => {
+  const insertNode = ({
+    tree,
+    folderId,
+    name,
+    isFolder,
+  }: {
+    tree: any;
+    folderId: any;
+    name: any;
+    isFolder: any;
+  }) => {
     if (tree?.id === folderId) {
       if (isFolder) {
         tree.files.push({
@@ -17,7 +27,7 @@ export const useTraverseTree = () => {
     }
 
     if (tree?.files) {
-      tree.files = tree.files.map((obj) =>
+      tree.files = tree.files.map((obj: any) =>
         insertNode({ tree: obj, folderId, name, isFolder })
       );
     } else if (Array.isArray(tree)) {
@@ -27,13 +37,13 @@ export const useTraverseTree = () => {
     }
     return tree;
   };
-  const deleteNode = ({ tree, folderId }) => {
+  const deleteNode = ({ tree, folderId }: { tree: any; folderId: any }) => {
     if (tree?.id === folderId) {
       return false;
     }
 
     if (tree?.files) {
-      tree.files = tree.files.filter((obj) =>
+      tree.files = tree.files.filter((obj: any) =>
         deleteNode({ tree: obj, folderId })
       );
     } else if (Array.isArray(tree)) {
@@ -41,14 +51,22 @@ export const useTraverseTree = () => {
     }
     return tree;
   };
-  const renameNode = ({ tree, folderId, newName }) => {
+  const renameNode = ({
+    tree,
+    folderId,
+    newName,
+  }: {
+    tree: any;
+    folderId: any;
+    newName: any;
+  }) => {
     if (tree?.id === folderId) {
       tree.name = newName;
       return tree;
     }
 
     if (tree?.files) {
-      tree.files = tree.files.map((obj) =>
+      tree.files = tree.files.map((obj: any) =>
         renameNode({ tree: obj, folderId, newName })
       );
     } else if (Array.isArray(tree)) {
@@ -56,7 +74,7 @@ export const useTraverseTree = () => {
     }
     return tree;
   };
-  const makeFolder = ({ tree, folderId }) => {
+  const makeFolder = ({ tree, folderId }: { tree: any; folderId: any }) => {
     if (tree?.id === folderId) {
       tree.files = [{ name: "default.txt", id: new Date().getTime() }];
       tree.isOpen = true;
@@ -64,7 +82,9 @@ export const useTraverseTree = () => {
     }
 
     if (tree?.files) {
-      tree.files = tree.files.map((obj) => makeFolder({ tree: obj, folderId }));
+      tree.files = tree.files.map((obj: any) =>
+        makeFolder({ tree: obj, folderId })
+      );
     } else if (Array.isArray(tree)) {
       tree = tree.filter((obj) => makeFolder({ tree: obj, folderId }));
     }

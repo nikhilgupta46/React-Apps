@@ -19,30 +19,30 @@ const SearchBox = ({
   const [searchValue, setSearchValue] = useState("");
   const [listData, setListData] = useState([]);
   const getData = getCachedData({ baseUrl, cacheTimeout: 3000 });
-  const debouncedChangeHandler = (fn, debTimeout) => {
-    let timerRef;
+  const debouncedChangeHandler = (fn: any, debTimeout: any) => {
+    let timerRef: any;
 
     return function () {
       const { shouldSearch } = onChangeHandler(arguments[0]);
       clearTimeout(timerRef);
       if (shouldSearch && autoComplete) {
         timerRef = setTimeout(() => {
-          fn(...arguments).then((dataList) => {
+          fn(...arguments).then((dataList: any) => {
             setListData(dataList);
           });
         }, debTimeout);
       }
     };
   };
-  const onChangeHandler = (event) => {
+  const onChangeHandler = (event: any) => {
     const value = event.target.value;
     setSearchValue(value);
     return { shouldSearch: value && value !== "" };
   };
   return (
     <div className="searchBoxContainer">
-      <text>{label}</text>
       <input
+        style={{ padding: "10px", borderRadius: "10px", fontSize: "15px" }}
         placeholder={placeholder}
         value={searchValue}
         onChange={debouncedChangeHandler(getData, debounceTimer)}

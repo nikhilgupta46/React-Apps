@@ -1,12 +1,21 @@
 import { useCallback, useRef } from "react";
-const useDebounce = ({ fn, delay, immediate }) => {
-  let debRef = useRef(null);
+const useDebounce = ({
+  fn,
+  delay,
+  immediate,
+}: {
+  fn: any;
+  delay: any;
+  immediate: any;
+}) => {
+  let debRef: any = useRef(null);
   const debounce = useCallback(
     function () {
-      const context = this;
+      // @ts-ignore
+      const context: any = this;
       const args = arguments;
       const callNow = immediate && !debRef.current;
-      clearTimeout(debRef.current);
+      clearTimeout(debRef.current as any);
       debRef.current = setTimeout(() => {
         debRef.current = null;
         if (immediate) {

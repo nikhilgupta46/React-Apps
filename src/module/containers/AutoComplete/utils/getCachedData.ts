@@ -1,7 +1,13 @@
-export const getCachedData = ({ baseUrl, cacheTimeout }) => {
-  const Cache = {};
+export const getCachedData = ({
+  baseUrl,
+  cacheTimeout,
+}: {
+  baseUrl: string;
+  cacheTimeout: number;
+}) => {
+  const Cache: any = {};
 
-  return ({ searchItem, page = 1 }) => {
+  return ({ searchItem, page = 1 }: { searchItem: any; page: number }) => {
     const keyStored = `${searchItem}-${page}`;
     if (
       !Cache[keyStored] ||

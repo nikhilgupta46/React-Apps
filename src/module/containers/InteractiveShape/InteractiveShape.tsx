@@ -1,12 +1,19 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import "./shape.css";
+
 const Box = ({
   show,
   highlight = false,
   updater = () => {},
   allow,
   ...rest
-}) => {
+}: {
+  show: boolean;
+  highlight: any;
+  updater: any;
+  allow: any;
+} & any) => {
   console.log("rest", rest);
   return (
     <div
@@ -21,10 +28,9 @@ const Box = ({
 };
 
 const BOX_DATA = [
-  [1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1],
+  [1, 1, 1],
+  [1, 1, 1],
 ];
 
 const InteractiveShape = () => {
@@ -44,7 +50,7 @@ const InteractiveShape = () => {
       });
     });
     SetBoxesMax(max);
-    setBoxtracker(data);
+    setBoxtracker(data as any);
     setTrackerCount(1);
     setAllow(true);
   };
@@ -56,15 +62,15 @@ const InteractiveShape = () => {
   const [trackerCount, setTrackerCount] = useState(1);
   const [allow, setAllow] = useState(true);
 
-  const fireFade = (boxTracker) => {
+  const fireFade = (boxTracker: any) => {
     let finder = 1;
-    const fire = (data) => {
+    const fire = (data: any) => {
       setTimeout(() => {
-        let row = null;
-        let col = null;
-        boxTracker.forEach((rowL, rowLIdx) => {
+        let row: any = null;
+        let col: any = null;
+        boxTracker.forEach((rowL: any, rowLIdx: any) => {
           if (row === null && col === null) {
-            rowL.forEach((colL, colIdx) => {
+            rowL.forEach((colL: any, colIdx: any) => {
               if (row === null && col === null) {
                 if (colL.tracker === finder) {
                   row = rowLIdx;
@@ -83,7 +89,7 @@ const InteractiveShape = () => {
         rowCopyBoxTracker[col] = { tracker: 0, highlight: false, show: true };
         copyBoxTracker[row] = [...rowCopyBoxTracker];
         const updatedBoxTracker = [...copyBoxTracker];
-        setBoxtracker(updatedBoxTracker);
+        setBoxtracker(updatedBoxTracker as any);
         finder++;
         if (finder <= boxesMax) {
           fire(updatedBoxTracker);
@@ -95,18 +101,18 @@ const InteractiveShape = () => {
     };
     fire(boxTracker);
   };
-  const updater = (row, col) => {
-    let copyBoxTracker = [...boxTracker];
-    let rowCopyBoxTracker = [...copyBoxTracker[row]];
+  const updater = (row: any, col: any) => {
+    let copyBoxTracker: any = [...boxTracker];
+    let rowCopyBoxTracker: any = [...copyBoxTracker[row]];
     rowCopyBoxTracker[col] = { tracker: trackerCount, highlight: true };
     copyBoxTracker[row] = rowCopyBoxTracker;
     const updatedBoxTracker = [...copyBoxTracker];
     if (trackerCount >= boxesMax) {
-      setBoxtracker(updatedBoxTracker);
+      setBoxtracker(updatedBoxTracker as any);
       fireFade(updatedBoxTracker);
     } else {
       setTrackerCount((trackerCount) => trackerCount + 1);
-      setBoxtracker(updatedBoxTracker);
+      setBoxtracker(updatedBoxTracker as any);
     }
     setAllow(true);
   };
@@ -115,7 +121,7 @@ const InteractiveShape = () => {
       {boxTracker.map((row, rowIdx) => {
         return (
           <div className="row">
-            {row.map((col, colIdx) => (
+            {(row as any).map((col: any, colIdx: any) => (
               <Box
                 highlight={col.highlight}
                 show={col.show}

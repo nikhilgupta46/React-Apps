@@ -1,0 +1,11 @@
+.gridItem {
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  flex: 1 1 40%;
+  align-items: stretch;
+}

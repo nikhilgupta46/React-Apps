@@ -12,7 +12,7 @@ export const useGetData = () => {
       }, 300);
     })
       .then(() => {
-        setData(initialData);
+        setData(initialData as any);
         setLoading(false);
       })
       .catch((e) => {

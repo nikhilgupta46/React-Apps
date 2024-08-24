@@ -1,8 +1,8 @@
 .searchBoxContainer {
-  background-color: red;
   display: flex;
   flex-direction: column;
   position: relative;
+  margin: 10px;
 }
 
 .listBox {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FileList } from "./FileList.js";
-import { useTraverseTree } from "./useTraverseTree.js";
-import { useGetData } from "./useGetData.js";
+import { FileList } from "./FileList.tsx";
+import { useTraverseTree } from "./useTraverseTree.ts";
+import { useGetData } from "./useGetData.ts";
 
 export default function FileFolder() {
   const { data, loading, setData } = useGetData();
@@ -9,14 +9,14 @@ export default function FileFolder() {
   const [isFolder, setFolderStatus] = useState(false);
   const { insertNode, deleteNode, renameNode, makeFolder } = useTraverseTree();
 
-  const onChange = (event) => {
+  const onChange = (event: any) => {
     const value = event.target.value;
     setSearch(value);
   };
   const insertNodeHandler = ({ ...params }) => {
     if (search.length) {
       const updatedData = insertNode({
-        ...params,
+        ...(params as any),
         isFolder,
         tree: data,
         name: search,
@@ -28,16 +28,16 @@ export default function FileFolder() {
     }
   };
   const deleteNodeHandler = ({ ...params }) => {
-    const updatedData = deleteNode({ ...params, tree: data });
+    const updatedData = deleteNode({ ...(params as any), tree: data });
     setData(updatedData);
   };
   const renameNodeHandler = ({ ...params }) => {
-    const updatedData = renameNode({ ...params, tree: data });
+    const updatedData = renameNode({ ...(params as any), tree: data });
     setData(updatedData);
   };
 
   const makeFolderHandler = ({ ...params }) => {
-    const updatedData = makeFolder({ ...params, tree: data });
+    const updatedData = makeFolder({ ...(params as any), tree: data });
     setData(updatedData);
   };
   return (
@@ -47,8 +47,6 @@ export default function FileFolder() {
         flexDirection: "row",
         justifyContent: "space-between",
         border: "1px solid black ",
-        height: "100vw",
-        width: "100vw",
         backgroundColor: "gray",
         margin: "10px",
         padding: "10px",
@@ -63,25 +61,20 @@ export default function FileFolder() {
           border: "2px solid",
           overflowY: "auto",
           padding: "10px",
-          width: "50vw",
-          height: "100%",
+          // width: "50vw",
+          // height: "100%",
         }}
       >
         {loading ? (
           <text>Loading File Structure...</text>
         ) : (
-          <div style={{}}>
-            <div style={{ marginBottom: "30px" }}>
-              <text style={{ fontSize: "30px" }}>File structure</text>
-            </div>
-            <FileList
-              data={data ?? []}
-              insertNode={insertNodeHandler}
-              deleteNode={deleteNodeHandler}
-              renameNode={renameNodeHandler}
-              makeFolder={makeFolderHandler}
-            />
-          </div>
+          <FileList
+            data={data ?? []}
+            insertNode={insertNodeHandler}
+            deleteNode={deleteNodeHandler}
+            renameNode={renameNodeHandler}
+            makeFolder={makeFolderHandler}
+          />
         )}
       </div>
       <div
@@ -91,7 +84,7 @@ export default function FileFolder() {
           borderRadius: "10px",
           border: "2px solid",
           padding: "10px",
-          width: "40vw",
+          // width: "40vw",
           marginLeft: "20px",
         }}
       >

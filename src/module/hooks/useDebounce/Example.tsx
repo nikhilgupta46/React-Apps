@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDebounce } from "./useDebounce";
 import "./Debounce.css";
+import React from "react";
 
 const Debounce = () => {
   const debounce = useDebounce({
@@ -16,6 +17,7 @@ const Debounce = () => {
       window.removeEventListener("mousemove", debounce);
     };
   }, [debounce]);
+
   return <div className="container">Debounce</div>;
 };
 

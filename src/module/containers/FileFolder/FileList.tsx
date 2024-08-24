@@ -6,6 +6,12 @@ export const FileList = ({
   deleteNode,
   renameNode,
   makeFolder,
+}: {
+  data: any;
+  insertNode: any;
+  deleteNode: any;
+  renameNode: any;
+  makeFolder: any;
 }) => {
   return (
     <div
@@ -13,7 +19,7 @@ export const FileList = ({
         marginLeft: "20px",
       }}
     >
-      {data.map((item) => {
+      {data.map((item: any) => {
         return (
           <FileFolder
             item={item}
@@ -34,6 +40,12 @@ const FileFolder = ({
   deleteNode,
   renameNode,
   makeFolder,
+}: {
+  item: any;
+  insertNode: any;
+  deleteNode: any;
+  renameNode: any;
+  makeFolder: any;
 }) => {
   const [isFolderOpen, setFolderOpenStatus] = useState(item.isOpen);
   const [rename, setRename] = useState({ value: "", isVisible: false });
@@ -66,7 +78,7 @@ const FileFolder = ({
             ) : (
               <text
                 style={{ marginLeft: "10px", cursor: "pointer" }}
-                onClick={() => setFolderOpenStatus((prev) => !prev)}
+                onClick={() => setFolderOpenStatus((prev: any) => !prev)}
               >
                 {item.name}
               </text>
@@ -87,7 +99,7 @@ const FileFolder = ({
                     alert("Please specify valid name or discard editing");
                   }
                 } else {
-                  renameHandler({ folderId: item.id });
+                  renameHandler();
                 }
               }}
               style={{ marginLeft: "10px" }}
@@ -156,7 +168,7 @@ const FileFolder = ({
                     alert("Please specify valid name or discard editing");
                   }
                 } else {
-                  renameHandler({ folderId: item.id });
+                  renameHandler();
                 }
               }}
               style={{ marginLeft: "10px" }}
