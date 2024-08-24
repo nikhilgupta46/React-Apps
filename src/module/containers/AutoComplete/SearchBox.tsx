@@ -27,7 +27,10 @@ const SearchBox = ({
       clearTimeout(timerRef);
       if (shouldSearch && autoComplete) {
         timerRef = setTimeout(() => {
-          fn(...arguments).then((dataList: any) => {
+          console.log("arguments", arguments[0]);
+          const event = arguments[0];
+          fn({ searchItem: "people" }).then((dataList: any) => {
+            console.log("dataList", dataList);
             setListData(dataList);
           });
         }, debTimeout);

@@ -20,4 +20,9 @@ export const RouteConfig = [
     component: () => <FileFolder />,
     route: "fileFolder",
   },
+  {
+    label: "",
+    component: () => <div></div>,
+    route: "dummys",
+  },
 ];

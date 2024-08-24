@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  flex: 1 1 40%;
+  flex: 1 1 45%;
   align-items: stretch;
+}
+
+.gridItem__hide {
+  border-width: 0px;
 }

@@ -50,6 +50,9 @@ export default function FileFolder() {
         backgroundColor: "gray",
         margin: "10px",
         padding: "10px",
+        alignSelf: "center",
+        width: "100%",
+        height: "100%",
       }}
     >
       <div
