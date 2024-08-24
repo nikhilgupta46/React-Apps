@@ -20,9 +20,10 @@ function App() {
 
       <div className="app">
         {RouteConfig.map((r) => {
+          const C: any = r.component;
           return (
             <Item label={r.label} route={r.route}>
-              {r.component()}
+              <C />
             </Item>
           );
         })}

@@ -1,5 +1,6 @@
 import "./styles.css";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 export const Item = ({
   label,
   route,
@@ -9,6 +10,7 @@ export const Item = ({
   children: any;
   route: string;
 }) => {
+  const navigate = useNavigate();
   return (
     <div className={`gridItem ${!label ? "gridItem__hide" : null}`}>
       {label ? (
@@ -39,7 +41,9 @@ export const Item = ({
               fontWeight: "bold",
               fontSize: "15px",
             }}
-            onClick={() => {}}
+            onClick={() => {
+              navigate(route);
+            }}
           >
             Full View
           </button>
