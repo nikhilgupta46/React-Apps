@@ -9,7 +9,7 @@ export const Routing = () => {
       <Routes>
         <Route path="/" Component={App} />
         {RouteConfig.map((r) => (
-          <Route path={r.route} Component={r.component as any} />
+          <Route key={r.label} path={r.route} Component={r.component as any} />
         ))}
       </Routes>
     </BrowserRouter>

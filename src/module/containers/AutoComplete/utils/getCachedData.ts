@@ -1,3 +1,5 @@
+const LocalCache: any = {};
+
 export const getCachedData = ({
   baseUrl,
   cacheTimeout,
@@ -5,20 +7,18 @@ export const getCachedData = ({
   baseUrl: string;
   cacheTimeout: number;
 }) => {
-  const Cache: any = {};
-
   return ({ searchItem, page = 1 }: { searchItem: any; page: number }) => {
     const keyStored = `${searchItem}-${page}`;
     if (
-      !Cache[keyStored] ||
-      Date.now() - Cache[keyStored]?.lastUpdated >= cacheTimeout
+      !LocalCache[keyStored] ||
+      Date.now() - LocalCache[keyStored]?.lastUpdated >= cacheTimeout
     ) {
-      if (!(Cache[keyStored]?.data instanceof Promise)) {
+      if (!(LocalCache[keyStored]?.data instanceof Promise)) {
         let promiseRef = new Promise((resolve, reject) => {
-          fetch(`${baseUrl}${searchItem}/${page}`)
+          fetch(`${baseUrl}${searchItem}`)
             .then((response) => response.json())
             .then((response) => {
-              Cache[keyStored] = {
+              LocalCache[keyStored] = {
                 data: response,
                 lastUpdated: Date.now(),
               };
@@ -26,14 +26,14 @@ export const getCachedData = ({
             })
             .catch((e) => reject(e));
         });
-        Cache[keyStored] = {
+        LocalCache[keyStored] = {
           data: promiseRef,
           lastUpdated: Date.now(),
         };
       }
-      return Cache[keyStored].data;
+      return LocalCache[keyStored].data;
     } else {
-      return Promise.resolve(Cache[keyStored].data);
+      return Promise.resolve(LocalCache[keyStored].data);
     }
   };
 };

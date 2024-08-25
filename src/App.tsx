@@ -22,7 +22,7 @@ function App() {
         {RouteConfig.map((r) => {
           const C: any = r.component;
           return (
-            <Item label={r.label} route={r.route}>
+            <Item key={r.label} label={r.label} route={r.route}>
               <C />
             </Item>
           );

@@ -27,6 +27,7 @@ export const FileList = ({
             deleteNode={deleteNode}
             renameNode={renameNode}
             makeFolder={makeFolder}
+            key={item.id}
           />
         );
       })}

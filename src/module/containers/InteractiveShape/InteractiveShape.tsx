@@ -14,7 +14,6 @@ const Box = ({
   updater: any;
   allow: any;
 } & any) => {
-  console.log("rest", rest);
   return (
     <div
       className={`box ${highlight ? "highlight" : "default"} ${
@@ -120,9 +119,10 @@ const InteractiveShape = () => {
     <div className="container column">
       {boxTracker.map((row, rowIdx) => {
         return (
-          <div className="row">
+          <div className="row" key={rowIdx}>
             {(row as any).map((col: any, colIdx: any) => (
               <Box
+                key={colIdx}
                 highlight={col.highlight}
                 show={col.show}
                 allow={allow}
